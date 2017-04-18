@@ -1,0 +1,4 @@
+alias psg='ps -aux | grep'
+alias wt='watch -n 0.1'
+alias pk='pkill -9 -f'
+alias source_venv='source ~/Virtual_envs/.venv_tests/bin/activate'
