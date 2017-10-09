@@ -6,6 +6,7 @@ alias psg='ps -aux | grep'
 alias source_venv='source ~/Virtual_envs/.venv_tests/bin/activate; ipython'
 alias source_zsh='source ~/.zshrc'
 alias wt='watch -n 0.1'
+alias rm_pulseaudio_dir='rm -r ~/.config/pulse.old && mv ~/.config/pulse ~/.config/pulse.old'
 
 #   Git
 alias gdd='git difftool -d'
