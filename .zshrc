@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/Netanel/.oh-my-zsh
+export ZSH=/home/netanel/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -55,7 +55,6 @@ plugins=(git python Multi-word zsh-256color docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
-source $HOME/.intsights_aliases
 
 # User configuration
 
@@ -85,20 +84,29 @@ source $HOME/.intsights_aliases
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-DEFAULT_USER=Netanel
+DEFAULT_USER=netanel
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/Netanel/google-cloud-sdk/path.zsh.inc' ]; then source '/home/Netanel/google-cloud-sdk/path.zsh.inc'; fi
+# tmux execution
+tmux
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/Netanel/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/Netanel/google-cloud-sdk/completion.zsh.inc'; fi
-
+# fzf execution
+if [[ ! -d ~/.fzf ]];then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # zplug execution
 if [[ ! -d ~/.zplug ]];then
-    git clone https://github.com/zplug/zplug.git ~/.zplug
-    source ~/.zplug/init.zsh && zplug update --self
+    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    # git clone https://github.com/zplug/zplug.git ~/.zplug
+    # source ~/.zplug/init.zsh && zplug update --self
 fi
 source ~/.zplug/init.zsh
+zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:3
+zplug "b4b4r07/enhancd", from:github, use:init.sh
+zplug "zlsun/solarized-man", from:github
+zplug "zsh-users/zsh-autosuggestions", from:github
+zplug "hcgraf/zsh-sudo", from:github
+zplug install
 zplug load
