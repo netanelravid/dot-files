@@ -1,0 +1,11 @@
+Show running Terminal with Tmux
+    gnome-terminal -e 'wmctrl -a __MY_TMUX_APP__'
+    => insert
+
+Show running VScode
+    gnome-terminal -e 'wmctrl -a Visual Studio Code'
+    => Menu
+
+Show running Chrome
+    gnome-terminal -e 'wmctrl -a Chrome'
+    => CTRL + insert
