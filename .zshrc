@@ -55,7 +55,6 @@ plugins=(git python Multi-word zsh-256color docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
-source $HOME/.intsights_aliases
 
 # User configuration
 
