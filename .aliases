@@ -8,14 +8,19 @@ alias source_zsh='source ~/.zshrc'
 alias wt='watch -n 0.1'
 alias rm_pulseaudio_dir='rm -r ~/.config/pulse.old && mv ~/.config/pulse ~/.config/pulse.old'
 alias als='cat ~/.aliases'
+alias refresh_wifi='sudo iwlist wlp3s0 scan'
 
 #   Git
-alias gdd='git difftool -d'
 alias gcaam='git add --all && git commit -m'
+alias gastsh='git add --all && git stash save'
+alias gdd='git difftool -d'
 alias gddd='git difftool -d dev'
+alias gddm='git difftool -d master'
 alias gmt='git mergetool'
 alias gmd='gl && gco dev && gl && gco - && git merge dev && gsu --remote'
+alias gmm='gl && gco master && gl && gco - && git merge master && gsu --remote'
 alias gamnd='git add -A && git commit --amend'
+alias glf='git log -p'
 
 #    Docker
 alias docker_rm='docker rm $(docker ps -q -f status=exited)'
