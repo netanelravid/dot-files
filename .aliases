@@ -1,3 +1,5 @@
+#!/bin/sh
+
 #   Bash
 alias copy_clipboard='tr -d '\''\n'\'' | xclip -sel clip'
 alias ngrok='ngrok http 80'
@@ -9,25 +11,49 @@ alias wt='watch -n 0.1'
 alias rm_pulseaudio_dir='rm -r ~/.config/pulse.old && mv ~/.config/pulse ~/.config/pulse.old'
 alias als='cat ~/.aliases'
 alias refresh_wifi='sudo iwlist wlp3s0 scan'
+alias p='ping 8.8.8.8'
+alias tr='tar zxvf'
+alias upgrade='sudo apt update; sudo apt upgrade; sudo apt autoremove; sudo apt autoclean'
+alias di="sudo dpkg -i"
 
 #   Git
 alias gcaam='git add --all && git commit -m'
+alias gstsh='git add --all && git stash save'
+alias gdv='gco dev'
+alias gmstr='gco master'
 alias gastsh='git add --all && git stash save'
 alias gdd='git difftool -d'
+alias gddh1='git difftool -d HEAD~1'
+alias gddh2='git difftool -d HEAD~2'
+alias gddh3='git difftool -d HEAD~3'
 alias gddd='git difftool -d dev'
 alias gddm='git difftool -d master'
+alias gddp='git difftool -d `git describe --all @{-1}`'
 alias gmt='git mergetool'
-alias gmd='gl && gco dev && gl && gco - && git merge dev && gsu --remote'
-alias gmm='gl && gco master && gl && gco - && git merge master && gsu --remote'
+alias gmd='gl ; gco dev && gl && gco - && git merge dev && gsu'
+alias gmm='gl ; gco master && gl && gco - && git merge master && gsu'
 alias gamnd='git add -A && git commit --amend'
 alias glf='git log -p'
+alias gpnew='gp --set-upstream origin `git describe --all | sed -e "s/heads\///"`'
+alias rm_orig='find . -type f -name "*.orig" | xargs rm'
 
 #    Docker
 alias docker_rm='docker rm $(docker ps -q -f status=exited)'
-alias dips='docker inspect --format "{{ .ID }} - {{ .Name }} - {{ .NetworkSettings.IPAddress }}" $(docker ps -q) | cut -d"/" -f 2'
+alias dips='docker inspect --format "{{ .NetworkSettings.Networks.production_default.IPAddress }} - {{ .Name }}" $(docker ps -q)'
+alias dip='docker inspect --format "{{ .NetworkSettings.Networks.production_default.IPAddress }} - {{ .Name }}" $(docker ps -q) | grep'
 alias dp='docker ps'
 alias dk='docker kill'
 alias dr='docker rm'
 alias dpa='docker ps -a'
-alias dkr='docker kill $(docker ps -q) && docker rm $(docker ps -a -q)'
+alias dkr=docker_kill_ane_remove
+alias dkra='docker kill $(docker ps -q) && docker rm $(docker ps -a -q)'
 alias dexec='docker exec -i -t'
+alias dbash=docker_exec_bash
+
+docker_kill_ane_remove() {
+    docker kill $1
+    docker rm $1
+}
+docker_exec_bash() {
+    docker exec -i -t $1 bash
+}
