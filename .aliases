@@ -15,10 +15,12 @@ alias p='ping 8.8.8.8'
 alias tr='tar zxvf'
 alias upgrade='sudo apt update; sudo apt upgrade; sudo apt autoremove; sudo apt autoclean'
 alias di="sudo dpkg -i"
+alias process_grep_by_port="sudo lsof -i -n -P | grep"
 
 #   Git
 alias gcaam='git add --all && git commit -m'
 alias gstsh='git add --all && git stash save'
+alias gbdel='get_delete_branches_local_and_remote'
 alias gdv='gco dev'
 alias gmstr='gco master'
 alias gastsh='git add --all && git stash save'
@@ -37,14 +39,21 @@ alias glf='git log -p'
 alias gpnew='gp --set-upstream origin `git describe --all | sed -e "s/heads\///"`'
 alias rm_orig='find . -type f -name "*.orig" | xargs rm'
 
+get_delete_branches_local_and_remote() {
+    git branch -D $1
+    git push origin --delete $1
+}
+
 #    Docker
 alias docker_rm='docker rm $(docker ps -q -f status=exited)'
 alias dips='docker inspect --format "{{ .NetworkSettings.Networks.production_default.IPAddress }} - {{ .Name }}" $(docker ps -q)'
 alias dip='docker inspect --format "{{ .NetworkSettings.Networks.production_default.IPAddress }} - {{ .Name }}" $(docker ps -q) | grep'
 alias dp='docker ps'
+alias dpg='docker ps | grep'
 alias dk='docker kill'
 alias dr='docker rm'
 alias dpa='docker ps -a'
+alias dl='docker logs'
 alias dkr=docker_kill_ane_remove
 alias dkra='docker kill $(docker ps -q) && docker rm $(docker ps -a -q)'
 alias dexec='docker exec -i -t'
