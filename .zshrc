@@ -44,7 +44,7 @@ if ! command -v fd > /dev/null; then
 fi
 
 #   Install zplug
-if ! command -v zplug > /dev/null; then
+if [ ! -d ~/.zplug ]; then
     curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 fi
 
