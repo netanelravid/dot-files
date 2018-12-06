@@ -3,7 +3,6 @@ ZSH_THEME="agnoster"
 
 export ZSH=/home/$DEFAULT_USER/.oh-my-zsh
 
-
 plugins=(git python Multi-word zsh-256color docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
@@ -18,7 +17,41 @@ fi
 export LANG=en_US.UTF-8
 export EDITOR='code'
 
+# -------------------------- Programs --------------------------
+#   Install fzf
+if [ ! -f ~/.fzf/install ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#   Install bat
+if ! command -v bat > /dev/null; then
+    wget -P ~/tmp https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
+    sudo dpkg -i ~/tmp/bat_0.9.0_amd64.deb
+fi
+
+#   Install ripgrep
+if ! command -v rg > /dev/null; then
+    wget -P ~/tmp https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb
+    sudo dpkg -i ~/tmp/ripgrep_0.10.0_amd64.deb
+fi
+
+#   Install fd
+if ! command -v fd > /dev/null; then
+    wget -P ~/tmp https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb
+    sudo dpkg -i ~/tmp/fd_7.2.0_amd64.deb
+fi
+
+#   Install zplug
+if ! command -v zplug > /dev/null; then
+    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+
+# Install tpm
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
 # -------------------------- Zplug --------------------------
 source ~/.zplug/init.zsh
