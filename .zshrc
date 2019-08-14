@@ -17,6 +17,11 @@ fi
 export LANG=en_US.UTF-8
 export EDITOR='code'
 
+# Golang configuration
+export GO15VENDOREXPERIMENT=1
+export GOPATH=/home/nravid/dev
+export PATH=$PATH:$GOPATH/bin
+
 # -------------------------- Programs --------------------------
 #   Install fzf
 if [ ! -f ~/.fzf/install ]; then
@@ -78,3 +83,4 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi

@@ -3,7 +3,7 @@
 #   Bash
 alias copy_clipboard='tr -d '\''\n'\'' | xclip -sel clip'
 alias ngrok='ngrok http 80'
-alias pk='pkill -9 -f'
+alias pk='kill_processes_by_name'
 alias psg='ps -aux | grep'
 alias source_venv='source ~/Virtual_envs/.venv_tests/bin/activate; ipython'
 alias source_zsh='source ~/.zshrc'
@@ -16,10 +16,12 @@ alias tr='tar zxvf'
 alias upgrade='sudo apt update; sudo apt upgrade; sudo apt autoremove; sudo apt autoclean'
 alias di="sudo dpkg -i"
 alias process_grep_by_port="sudo lsof -i -n -P | grep"
+alias apti="sudo apt install"
+alias apts="sudo apt search"
 
 #   Git
 alias gcaam='git add --all && git commit -m'
-alias gstsh='git add --all && git stash save'
+alias gstsh='git add --all && git stash push -m'
 alias gbdel='get_delete_branches_local_and_remote'
 alias gdv='gco dev'
 alias gmstr='gco master'
@@ -28,26 +30,33 @@ alias gdd='git difftool -d'
 alias gddh1='git difftool -d HEAD~1'
 alias gddh2='git difftool -d HEAD~2'
 alias gddh3='git difftool -d HEAD~3'
-alias gddd='git difftool -d dev'
+alias gddd='git difftool -d develop'
 alias gddm='git difftool -d master'
 alias gddp='git difftool -d `git describe --all @{-1}`'
 alias gmt='git mergetool'
 alias gmd='gl ; gco dev && gl && gco - && git merge dev && gsu'
 alias gmm='gl ; gco master && gl && gco - && git merge master && gsu'
-alias gamnd='git add -A && git commit --amend'
+alias gmnd='git commit --amend'
+alias gaamnd='git add -A && git commit --amend'
 alias glf='git log -p'
 alias gpnew='gp --set-upstream origin `git describe --all | sed -e "s/heads\///"`'
+alias grm='git rebase master'
 alias rm_orig='find . -type f -name "*.orig" | xargs rm'
+alias grd="git rebase develop"
 
 get_delete_branches_local_and_remote() {
     git branch -D $1
     git push origin --delete $1
 }
 
+kill_processes_by_name() {
+    ps axf | grep sidecar | grep -v grep | awk '{print "kill -9 " $1}' | sudo sh
+}
+
 #    Docker
 alias docker_rm='docker rm $(docker ps -q -f status=exited)'
-alias dips='docker inspect --format "{{ .NetworkSettings.Networks.production_default.IPAddress }} - {{ .Name }}" $(docker ps -q)'
-alias dip='docker inspect --format "{{ .NetworkSettings.Networks.production_default.IPAddress }} - {{ .Name }}" $(docker ps -q) | grep'
+alias dips='docker inspect --format "{{ .NetworkSettings.Networks.bridge.IPAddress }} - {{ .Name }}" $(docker ps -q)'
+alias dip='docker inspect --format "{{ .NetworkSettings.Networks.bridge.IPAddress }} - {{ .Name }}" $(docker ps -q) | grep'
 alias dp='docker ps'
 alias dpg='docker ps | grep'
 alias dk='docker kill'
@@ -55,9 +64,18 @@ alias dr='docker rm'
 alias dpa='docker ps -a'
 alias dl='docker logs'
 alias dkr=docker_kill_ane_remove
-alias dkra='docker kill $(docker ps -q) && docker rm $(docker ps -a -q)'
+alias dkra='docker ps -aq --no-trunc -f status=exited | xargs docker rm'
 alias dexec='docker exec -i -t'
 alias dbash=docker_exec_bash
+alias dcdown='docker-compose down'
+alias dc_id=get_docker_container_id
+alias dins='docker inspect'
+alias dcbuild='docker-compose build'
+alias dcbuild_nocache='docker-compose build --no-cache'
+
+get_docker_container_id() {
+    docker ps -qf "name=$1"
+}
 
 docker_kill_ane_remove() {
     docker kill $1
