@@ -18,6 +18,9 @@ alias di="sudo dpkg -i"
 alias process_grep_by_port="sudo lsof -i -n -P | grep"
 alias apti="sudo apt install"
 alias apts="sudo apt search"
+alias ll="exa -l"
+alias b64_decode="python3.5 ~/Programs/python/b64_decode.py"
+alias b64_encode="python3.5 ~/Programs/python/b64_encode.py"
 
 #   Git
 alias gcaam='git add --all && git commit -m'
@@ -43,6 +46,9 @@ alias gpnew='gp --set-upstream origin `git describe --all | sed -e "s/heads\///"
 alias grm='git rebase master'
 alias rm_orig='find . -type f -name "*.orig" | xargs rm'
 alias grd="git rebase develop"
+alias gsqsh="git rebase -i"
+alias git_clean_files="gst | ag '_(BACKUP|LOCAL|REMOTE|BASE)' | xargs rm"
+alias gstshwip="git add --all && git stash push -m \"WIP\""
 
 get_delete_branches_local_and_remote() {
     git branch -D $1
@@ -68,6 +74,7 @@ alias dkra='docker ps -aq --no-trunc -f status=exited | xargs docker rm'
 alias dexec='docker exec -i -t'
 alias dbash=docker_exec_bash
 alias dcdown='docker-compose down'
+alias dckill='docker-compose kill'
 alias dc_id=get_docker_container_id
 alias dins='docker inspect'
 alias dcbuild='docker-compose build'

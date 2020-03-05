@@ -3,7 +3,7 @@ ZSH_THEME="agnoster"
 
 export ZSH=/home/$DEFAULT_USER/.oh-my-zsh
 
-plugins=(git python Multi-word zsh-256color docker docker-compose)
+plugins=(git python zsh-256color docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -21,6 +21,7 @@ export EDITOR='code'
 export GO15VENDOREXPERIMENT=1
 export GOPATH=/home/nravid/dev
 export PATH=$PATH:$GOPATH/bin
+export GO111MODULE=on
 
 # -------------------------- Programs --------------------------
 #   Install fzf
@@ -73,6 +74,7 @@ zplug "zlsun/solarized-man"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
+zplug "chrissicool/zsh-256color"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
