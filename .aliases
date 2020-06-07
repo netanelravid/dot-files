@@ -26,6 +26,7 @@ alias b64_encode="python3.5 ~/Programs/python/b64_encode.py"
 alias gcaam='git add --all && git commit -m'
 alias gstsh='git add --all && git stash push -m'
 alias gbdel='get_delete_branches_local_and_remote'
+alias gbdel_local='git branch -D $1'
 alias gdv='gco dev'
 alias gmstr='gco master'
 alias gastsh='git add --all && git stash save'
@@ -49,6 +50,7 @@ alias grd="git rebase develop"
 alias gsqsh="git rebase -i"
 alias git_clean_files="gst | ag '_(BACKUP|LOCAL|REMOTE|BASE)' | xargs rm"
 alias gstshwip="git add --all && git stash push -m \"WIP\""
+alias gs="git status"   # get rid of the 'gs' annoying software!
 
 get_delete_branches_local_and_remote() {
     git branch -D $1

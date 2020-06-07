@@ -23,6 +23,11 @@ export GOPATH=/home/nravid/dev
 export PATH=$PATH:$GOPATH/bin
 export GO111MODULE=on
 
+# Python Virtual env configuration
+export WORKON_HOME=~/.virtualenvs
+. /usr/local/bin/virtualenvwrapper.sh
+
+
 # -------------------------- Programs --------------------------
 #   Install fzf
 if [ ! -f ~/.fzf/install ]; then
