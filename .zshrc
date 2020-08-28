@@ -20,13 +20,15 @@ export EDITOR='code'
 # Golang configuration
 export GO15VENDOREXPERIMENT=1
 export GOPATH=/home/nravid/dev
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:$HOME/.cargo/bin
 export GO111MODULE=on
 
 # Python Virtual env configuration
 export WORKON_HOME=~/.virtualenvs
 . /usr/local/bin/virtualenvwrapper.sh
 
+# Run Krew (kubectl plugins installer)
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 # -------------------------- Programs --------------------------
 #   Install fzf
