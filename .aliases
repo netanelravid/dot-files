@@ -25,11 +25,12 @@ alias b64_encode="python3.5 ~/Programs/python/b64_encode.py"
 #   Git
 alias gcaam='git add --all && git commit -m'
 alias gstsh='git add --all && git stash push -m'
-alias gbdel='get_delete_branches_local_and_remote'
 alias gbdel_local='git branch -D $1'
+alias gbdel_remote='git push origin --delete $1'
 alias gdv='gco dev'
 alias gmstr='gco master'
 alias gastsh='git add --all && git stash save'
+alias gd='git diff | diff-so-fancy'
 alias gdd='git difftool -d'
 alias gddh1='git difftool -d HEAD~1'
 alias gddh2='git difftool -d HEAD~2'
@@ -51,11 +52,6 @@ alias gsqsh="git rebase -i"
 alias git_clean_files="gst | ag '_(BACKUP|LOCAL|REMOTE|BASE)' | xargs rm"
 alias gstshwip="git add --all && git stash push -m \"WIP\""
 alias gs="git status"   # get rid of the 'gs' annoying software!
-
-get_delete_branches_local_and_remote() {
-    git branch -D $1
-    git push origin --delete $1
-}
 
 kill_processes_by_name() {
     ps axf | grep sidecar | grep -v grep | awk '{print "kill -9 " $1}' | sudo sh
