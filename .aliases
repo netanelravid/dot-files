@@ -19,6 +19,7 @@ alias process_grep_by_port="sudo lsof -i -n -P | grep"
 alias apti="sudo apt install"
 alias apts="sudo apt search"
 alias ll="exa -l"
+alias la="exa -la"
 alias b64_decode="python3.5 ~/Programs/python/b64_decode.py"
 alias b64_encode="python3.5 ~/Programs/python/b64_encode.py"
 
