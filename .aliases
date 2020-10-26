@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #   Bash
-alias copy_clipboard='tr -d '\''\n'\'' | xclip -sel clip'
+alias copy_clipboard="/usr/bin/tr -d '\n' | xclip -sel clip"
 alias ngrok='ngrok http 80'
 alias pk='kill_processes_by_name'
 alias psg='ps -aux | grep'
