@@ -1,0 +1,63 @@
+#!/bin/zsh
+
+ZSH_THEME="agnoster"
+
+export ZSH=$HOME/.oh-my-zsh
+
+plugins=(git python docker docker-compose)
+
+source $ZSH/oh-my-zsh.sh
+
+# Aliases
+if [ -f $HOME/.aliases ]; then
+    source $HOME/.aliases
+fi
+if [ -f $HOME/.aliases_work ]; then
+    source $HOME/.aliases_work
+fi
+
+# User configuration
+export LANG=en_US.UTF-8
+export EDITOR='code'
+
+# Golang configuration
+export GO15VENDOREXPERIMENT=1
+export GOPATH=$HOME/dev
+export PATH=$PATH:$GOPATH/bin:$HOME/.cargo/bin
+export GO111MODULE=on
+export GOPROXY=direct
+
+# # Python Virtual env configuration
+# export WORKON_HOME=~/.virtualenvs
+# . /usr/local/bin/virtualenvwrapper.sh
+
+# fzf init
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# -------------------------- Zplug --------------------------
+source ~/.zplug/init.zsh
+
+# let zplug manage itself
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+# Load zplug Plugins
+zplug "b4b4r07/enhancd", use:init.sh
+zplug "hcgraf/zsh-sudo"
+zplug "plugins/extract", from:oh-my-zsh
+zplug "zlsun/solarized-man"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "chrissicool/zsh-256color"
+zplug load
+
+# Install kubectl autoaomplete
+if command -v kubectl > /dev/null; then
+    source <(kubectl completion zsh);
+fi
+
+# source .zshrc_work.sh
+if [ -f $HOME/.zshrc_work.sh ]; then
+    source $HOME/.zshrc_work.sh
+else
+fi

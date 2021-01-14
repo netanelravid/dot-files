@@ -53,6 +53,7 @@ alias gsqsh="git rebase -i"
 alias git_clean_files="gst | ag '_(BACKUP|LOCAL|REMOTE|BASE)' | xargs rm"
 alias gstshwip="git add --all && git stash push -m \"WIP\""
 alias gs="git status"   # get rid of the 'gs' annoying software!
+# alias gco_backup="gco -b `git branch --show-current`-backup-test-locally"
 
 kill_processes_by_name() {
     ps axf | grep sidecar | grep -v grep | awk '{print "kill -9 " $1}' | sudo sh

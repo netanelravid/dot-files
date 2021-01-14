@@ -1,14 +1,15 @@
-DEFAULT_USER=`whoami`
 ZSH_THEME="agnoster"
 
-export ZSH=/home/$DEFAULT_USER/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 plugins=(git python zsh-256color docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
-source $HOME/.aliases
+if [ -f $HOME/.aliases ]; then
+    source $HOME/.aliases
+fi
 if [ -f $HOME/.aliases_work ]; then
     source $HOME/.aliases_work
 fi
@@ -19,16 +20,16 @@ export EDITOR='code'
 
 # Golang configuration
 export GO15VENDOREXPERIMENT=1
-export GOPATH=/home/nravid/dev
+export GOPATH=$HOME/dev
 export PATH=$PATH:$GOPATH/bin:$HOME/.cargo/bin
 export GO111MODULE=on
 
-# Python Virtual env configuration
-export WORKON_HOME=~/.virtualenvs
-. /usr/local/bin/virtualenvwrapper.sh
+# # Python Virtual env configuration
+# export WORKON_HOME=~/.virtualenvs
+# . /usr/local/bin/virtualenvwrapper.sh
 
-# Run Krew (kubectl plugins installer)
-export PATH="${PATH}:${HOME}/.krew/bin"
+# # Run Krew (kubectl plugins installer)
+# export PATH="${PATH}:${HOME}/.krew/bin"
 
 # -------------------------- Programs --------------------------
 #   Install fzf
@@ -38,58 +39,62 @@ if [ ! -f ~/.fzf/install ]; then
 fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#   Install bat
-if ! command -v bat > /dev/null; then
-    wget -P ~/tmp https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
-    sudo dpkg -i ~/tmp/bat_0.9.0_amd64.deb
-fi
+# #   Install bat
+# if ! command -v bat > /dev/null; then
+#     wget -P ~/tmp https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb
+#     sudo dpkg -i ~/tmp/bat_0.9.0_amd64.deb
+# fi
 
-#   Install ripgrep
-if ! command -v rg > /dev/null; then
-    wget -P ~/tmp https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb
-    sudo dpkg -i ~/tmp/ripgrep_0.10.0_amd64.deb
-fi
+# #   Install ripgrep
+# if ! command -v rg > /dev/null; then
+#     wget -P ~/tmp https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb
+#     sudo dpkg -i ~/tmp/ripgrep_0.10.0_amd64.deb
+# fi
 
-#   Install fd
-if ! command -v fd > /dev/null; then
-    wget -P ~/tmp https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb
-    sudo dpkg -i ~/tmp/fd_7.2.0_amd64.deb
-fi
+# #   Install fd
+# if ! command -v fd > /dev/null; then
+#     wget -P ~/tmp https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb
+#     sudo dpkg -i ~/tmp/fd_7.2.0_amd64.deb
+# fi
 
-#   Install zplug
-if [ ! -d ~/.zplug ]; then
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-fi
+# #   Install zplug
+# if [ ! -d ~/.zplug ]; then
+#     curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+# fi
 
-# Install tpm
-if [ ! -d ~/.tmux/plugins/tpm ]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
+# # Install tpm
+# if [ ! -d ~/.tmux/plugins/tpm ]; then
+#     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# fi
 
-# -------------------------- Zplug --------------------------
-source ~/.zplug/init.zsh
+# # -------------------------- Zplug --------------------------
+# source ~/.zplug/init.zsh
 
-# let zplug manage itself
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+# # let zplug manage itself
+# zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-# Plugins
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "hcgraf/zsh-sudo"
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/extract", from:oh-my-zsh
-zplug "zlsun/solarized-man"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "chrissicool/zsh-256color"
+# # Plugins
+# zplug "b4b4r07/enhancd", use:init.sh
+# zplug "hcgraf/zsh-sudo"
+# zplug "plugins/command-not-found", from:oh-my-zsh
+# zplug "plugins/extract", from:oh-my-zsh
+# zplug "zlsun/solarized-man"
+# zplug "zsh-users/zsh-autosuggestions"
+# zplug "zsh-users/zsh-completions"
+# zplug "zsh-users/zsh-syntax-highlighting"
+# zplug "chrissicool/zsh-256color"
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+# # Install plugins if there are plugins that have not been installed
+# if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
 
-zplug load
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+# zplug load
+# if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+
+# # SAML configuration
+# export SAML2AWS_USER_AGENT="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.00) Gecko/20100101 Firefox/82.0"
+
